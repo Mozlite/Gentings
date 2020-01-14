@@ -1,6 +1,6 @@
 using System;
 
-namespace Genting.Apis
+namespace Gentings.Apis
 {
     public class WeatherForecast
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Genting.Apis.Controllers
+namespace Gentings.Apis.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -22,6 +22,10 @@ namespace Genting.Apis.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// 获取天气预报。
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {

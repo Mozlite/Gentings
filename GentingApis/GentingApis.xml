@@ -4,5 +4,71 @@
         <name>GentingApis</name>
     </assembly>
     <members>
+        <member name="M:Gentings.Apis.Controllers.WeatherForecastController.Get">
+            <summary>
+            获取天气预报。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Gentings.Apis.Program">
+            <summary>
+            启动类型。
+            </summary>
+        </member>
+        <member name="M:Gentings.Apis.Program.Main(System.String[])">
+            <summary>
+            启动方法。
+            </summary>
+            <param name="args">参数。</param>
+        </member>
+        <member name="M:Gentings.Apis.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            创建服务器宿主实例。
+            </summary>
+            <param name="args">参数。</param>
+            <returns>返回服务器构建实例。</returns>
+        </member>
+        <member name="T:Gentings.Apis.HiddenApiAttribute">
+            <summary>
+            隐藏接口特性。
+            </summary>
+        </member>
+        <member name="M:Gentings.Apis.HiddenApiAttribute.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+            
+            </summary>
+            <param name="swaggerDoc"></param>
+            <param name="context"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:Gentings.Apis.Startup">
+            <summary>
+            启动类型。
+            </summary>
+        </member>
+        <member name="M:Gentings.Apis.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            初始化类<see cref="T:Gentings.Apis.Startup"/>。
+            </summary>
+            <param name="configuration">配置实例。</param>
+        </member>
+        <member name="P:Gentings.Apis.Startup.Configuration">
+            <summary>
+            配置实例。
+            </summary>
+        </member>
+        <member name="M:Gentings.Apis.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册服务。
+            </summary>
+            <param name="services">服务集合。</param>
+        </member>
+        <member name="M:Gentings.Apis.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            配置应用管道。
+            </summary>
+            <param name="app">应用管道构建实例。</param>
+            <param name="env">环境变量。</param>
+        </member>
     </members>
 </doc>

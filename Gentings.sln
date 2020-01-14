@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gentings", "Gentings\Gentings.csproj", "{9652EDA6-1B86-4A8C-B600-6EA80BAA3479}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GentingApis", "GentingApis\GentingApis.csproj", "{5CB7E8B2-4154-4A09-9503-EFD3D01CC9AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GentingApis", "GentingApis\GentingApis.csproj", "{D84C891A-EDD5-4104-AA43-715BD883E6F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{9652EDA6-1B86-4A8C-B600-6EA80BAA3479}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9652EDA6-1B86-4A8C-B600-6EA80BAA3479}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9652EDA6-1B86-4A8C-B600-6EA80BAA3479}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5CB7E8B2-4154-4A09-9503-EFD3D01CC9AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5CB7E8B2-4154-4A09-9503-EFD3D01CC9AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5CB7E8B2-4154-4A09-9503-EFD3D01CC9AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5CB7E8B2-4154-4A09-9503-EFD3D01CC9AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D84C891A-EDD5-4104-AA43-715BD883E6F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D84C891A-EDD5-4104-AA43-715BD883E6F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D84C891A-EDD5-4104-AA43-715BD883E6F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D84C891A-EDD5-4104-AA43-715BD883E6F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
