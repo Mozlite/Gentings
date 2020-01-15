@@ -17,10 +17,6 @@ namespace Gentings.Extensions.Settings
                 .Column(s => s.SettingKey)
                 .Column(s => s.SettingValue)
             );
-        }
-
-        public void Up1(MigrationBuilder builder)
-        {
             builder.CreateTable<SettingDictionary>(table =>
                 table.Column(x => x.Id).Column(x => x.ParentId).Column(x => x.Name).Column(x => x.Value));
         }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Gentings.Extensions.Internal;
 
 namespace Gentings.Extensions
 {
@@ -14,7 +15,7 @@ namespace Gentings.Extensions
     /// </summary>
     /// <typeparam name="TModel">模型类型。</typeparam>
     /// <typeparam name="TKey">模型主键类型。</typeparam>
-    public abstract class CachableObjectManager<TModel, TKey> : ObjectManager<TModel, TKey>, ICachableObjectManager<TModel, TKey>
+    public abstract class CachableObjectManager<TModel, TKey> : ObjectManagerBase<TModel, TKey>, ICachableObjectManager<TModel, TKey>
         where TModel : IIdObject<TKey>
     {
         /// <summary>
@@ -22,7 +23,7 @@ namespace Gentings.Extensions
         /// </summary>
         protected IMemoryCache Cache { get; }
         /// <summary>
-        /// 初始化类<see cref="ObjectManager{TModel,TKey}"/>。
+        /// 初始化类<see cref="CachableObjectManager{TModel,TKey}"/>。
         /// </summary>
         /// <param name="context">数据库操作实例。</param>
         /// <param name="cache">缓存接口。</param>
@@ -177,23 +178,23 @@ namespace Gentings.Extensions
         /// 根据条件更新特定的实例。
         /// </summary>
         /// <param name="expression">条件表达式。</param>
-        /// <param name="satement">更新对象。</param>
+        /// <param name="fields">更新对象。</param>
         /// <returns>返回更新结果。</returns>
-        public override DataResult Update(Expression<Predicate<TModel>> expression, object satement)
+        public override DataResult Update(Expression<Predicate<TModel>> expression, object fields)
         {
-            return Refresh(base.Update(expression, satement));
+            return Refresh(base.Update(expression, fields));
         }
 
         /// <summary>
         /// 根据条件更新特定的实例。
         /// </summary>
         /// <param name="expression">条件表达式。</param>
-        /// <param name="satement">更新对象。</param>
+        /// <param name="fields">更新对象。</param>
         /// <param name="cancellationToken">取消标识。</param>
         /// <returns>返回更新结果。</returns>
-        public override async Task<DataResult> UpdateAsync(Expression<Predicate<TModel>> expression, object satement, CancellationToken cancellationToken = default)
+        public override async Task<DataResult> UpdateAsync(Expression<Predicate<TModel>> expression, object fields, CancellationToken cancellationToken = default)
         {
-            return Refresh(await base.UpdateAsync(expression, satement, cancellationToken));
+            return Refresh(await base.UpdateAsync(expression, fields, cancellationToken));
         }
 
         /// <summary>
@@ -245,23 +246,23 @@ namespace Gentings.Extensions
         /// 根据条件更新特定的实例。
         /// </summary>
         /// <param name="id">唯一Id。</param>
-        /// <param name="satement">更新对象。</param>
+        /// <param name="fields">更新对象。</param>
         /// <returns>返回更新结果。</returns>
-        public override DataResult Update(TKey id, object satement)
+        public override DataResult Update(TKey id, object fields)
         {
-            return Refresh(base.Update(id, satement));
+            return Refresh(base.Update(id, fields));
         }
 
         /// <summary>
         /// 根据条件更新特定的实例。
         /// </summary>
         /// <param name="id">唯一Id。</param>
-        /// <param name="satement">更新对象。</param>
+        /// <param name="fields">更新对象。</param>
         /// <param name="cancellationToken">取消标识。</param>
         /// <returns>返回更新结果。</returns>
-        public override async Task<DataResult> UpdateAsync(TKey id, object satement, CancellationToken cancellationToken = default)
+        public override async Task<DataResult> UpdateAsync(TKey id, object fields, CancellationToken cancellationToken = default)
         {
-            return Refresh(await base.UpdateAsync(id, satement, cancellationToken));
+            return Refresh(await base.UpdateAsync(id, fields, cancellationToken));
         }
 
         /// <summary>
@@ -305,7 +306,7 @@ namespace Gentings.Extensions
         where TModel : IIdObject
     {
         /// <summary>
-        /// 初始化类<see cref="ObjectManager{TModel}"/>。
+        /// 初始化类<see cref="CachableObjectManager{TModel}"/>。
         /// </summary>
         /// <param name="context">数据库操作实例。</param>
         /// <param name="cache">缓存接口。</param>

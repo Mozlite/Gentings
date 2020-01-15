@@ -14,5 +14,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="5.0.0-rc9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Gentings\Gentings.csproj" />
+  </ItemGroup>
+
 
 </Project>

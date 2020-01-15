@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Gentings.Data.SqlServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -53,6 +54,8 @@ namespace Gentings.Apis
         /// <param name="services">服务集合。</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
+            services.AddGentings(Configuration).AddSqlServer();
             services.AddAuthentication();
             services.AddAuthorization();
             services.AddSwaggerGen(options =>
@@ -116,7 +119,11 @@ namespace Gentings.Apis
             });
 
             app.UseSwagger();
-            app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiHelp V1"); });
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiHelp V1");
+                options.RoutePrefix = string.Empty;
+            });
         }
     }
 }

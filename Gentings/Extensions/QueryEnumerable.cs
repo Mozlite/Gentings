@@ -41,24 +41,6 @@ namespace Gentings.Extensions
         /// </summary>
         public int Pages { get; private set; }
 
-        /// <summary>
-        /// 页码。
-        /// </summary>
-        public int Page
-        {
-            get => Page;
-            set => Page = value;
-        }
-
-        /// <summary>
-        /// 每页显示记录数。
-        /// </summary>
-        public int PageSize
-        {
-            get => PageSize;
-            set => PageSize = value;
-        }
-
         private readonly List<TModel> _models = new List<TModel>();
 
         /// <summary>返回一个循环访问集合的枚举器。</summary>

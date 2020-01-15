@@ -1,6 +1,4 @@
-﻿using Gentings.Extensions.Categories;
-
-namespace Gentings.Extensions.Groups
+﻿namespace Gentings.Extensions.Groups
 {
     /// <summary>
     /// 分组管理接口。
