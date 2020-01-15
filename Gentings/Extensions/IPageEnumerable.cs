@@ -11,12 +11,12 @@ namespace Gentings.Extensions
         /// <summary>
         /// 页码。
         /// </summary>
-        int PI { get; }
+        int Page { get; }
 
         /// <summary>
         /// 每页显示记录数。
         /// </summary>
-        int PS { get; }
+        int PageSize { get; }
 
         /// <summary>
         /// 总记录数。

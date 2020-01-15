@@ -15,7 +15,7 @@ namespace Gentings.Extensions
         /// <summary>
         /// 页码。
         /// </summary>
-        public int PI
+        public int Page
         {
             get
             {
@@ -29,7 +29,7 @@ namespace Gentings.Extensions
         /// <summary>
         /// 每页显示记录数。
         /// </summary>
-        public int PS { get; set; } = 20;
+        public int PageSize { get; set; } = 20;
 
         /// <summary>
         /// 总记录数。
@@ -46,8 +46,8 @@ namespace Gentings.Extensions
         /// </summary>
         public int Page
         {
-            get => PI;
-            set => PI = value;
+            get => Page;
+            set => Page = value;
         }
 
         /// <summary>
@@ -55,8 +55,8 @@ namespace Gentings.Extensions
         /// </summary>
         public int PageSize
         {
-            get => PS;
-            set => PS = value;
+            get => PageSize;
+            set => PageSize = value;
         }
 
         private readonly List<TModel> _models = new List<TModel>();

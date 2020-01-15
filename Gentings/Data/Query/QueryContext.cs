@@ -729,11 +729,12 @@ namespace Gentings.Data.Query
         /// <summary>
         /// 查询数据库返回结果。
         /// </summary>
+        /// <typeparam name="TObject">返回的对象类型。</typeparam>
         /// <param name="pageIndex">页码。</param>
         /// <param name="pageSize">每页显示的记录数。</param>
         /// <param name="count">分页总记录数计算列。</param>
         /// <returns>返回数据列表。</returns>
-        public IPageEnumerable<TModel> AsEnumerable(int pageIndex, int pageSize, Expression<Func<TModel, object>> count = null)
+        public virtual IPageEnumerable<TObject> AsEnumerable<TObject>(int pageIndex, int pageSize, Expression<Func<TModel, object>> count = null)
         {
             //必须添加ORDER BY，如果没添加都自动附加主键排序
             _requiredOrderby = true;
@@ -743,8 +744,19 @@ namespace Gentings.Data.Query
                 Aggregation = Delimit<TModel>(count.GetPropertyAccess());
             else
                 Aggregation = "1";
-            return LoadPage();
+            return LoadPage<TObject>();
         }
+
+        /// <summary>
+        /// 查询数据库返回结果。
+        /// </summary>
+        /// <param name="pageIndex">页码。</param>
+        /// <param name="pageSize">每页显示的记录数。</param>
+        /// <param name="count">分页总记录数计算列。</param>
+        /// <returns>返回数据列表。</returns>
+        public IPageEnumerable<TModel> AsEnumerable(int pageIndex, int pageSize,
+            Expression<Func<TModel, object>> count = null)
+            => AsEnumerable<TModel>(pageIndex, pageSize, count);
 
         /// <summary>
         /// 查询数据库返回结果。
@@ -789,7 +801,21 @@ namespace Gentings.Data.Query
         /// <param name="count">分页总记录数计算列。</param>
         /// <param name="cancellationToken">取消标识。</param>
         /// <returns>返回数据列表。</returns>
-        public Task<IPageEnumerable<TModel>> AsEnumerableAsync(int pageIndex, int pageSize, Expression<Func<TModel, object>> count = null,
+        public virtual Task<IPageEnumerable<TModel>> AsEnumerableAsync(int pageIndex, int pageSize,
+            Expression<Func<TModel, object>> count = null,
+            CancellationToken cancellationToken = default)
+            => AsEnumerableAsync<TModel>(pageIndex, pageSize, count);
+
+        /// <summary>
+        /// 查询数据库返回结果。
+        /// </summary>
+        /// <typeparam name="TObject">返回的对象类型。</typeparam>
+        /// <param name="pageIndex">页码。</param>
+        /// <param name="pageSize">每页显示的记录数。</param>
+        /// <param name="count">分页总记录数计算列。</param>
+        /// <param name="cancellationToken">取消标识。</param>
+        /// <returns>返回数据列表。</returns>
+        public virtual Task<IPageEnumerable<TObject>> AsEnumerableAsync<TObject>(int pageIndex, int pageSize, Expression<Func<TModel, object>> count = null,
             CancellationToken cancellationToken = default)
         {
             //必须添加ORDER BY，如果没添加都自动附加主键排序
@@ -800,7 +826,7 @@ namespace Gentings.Data.Query
                 Aggregation = Delimit<TModel>(count.GetPropertyAccess());
             else
                 Aggregation = "1";
-            return LoadPageAsync(cancellationToken);
+            return LoadPageAsync<TObject>(cancellationToken);
         }
 
         /// <summary>
@@ -897,16 +923,18 @@ namespace Gentings.Data.Query
         /// <summary>
         /// 读取模型实例列表。
         /// </summary>
+        /// <typeparam name="TObject">返回的模型类型。</typeparam>
         /// <returns>返回模型实例列表。</returns>
-        protected IPageEnumerable<TModel> LoadPage()
+        protected IPageEnumerable<TObject> LoadPage<TObject>()
         {
-            var models = new PageEnumerable<TModel>();
-            models.PI = PageIndex ?? 1;
-            models.PS = Size ?? 20;
+            var models = new PageEnumerable<TObject>();
+            models.Page = PageIndex ?? 1;
+            models.PageSize = Size ?? 20;
+            var entityType = typeof(TObject).GetEntityType();
             using (var reader = _db.ExecuteReader(_sqlGenerator.Query(this).ToString()))
             {
                 while (reader.Read())
-                    models.Add(Entity.Read<TModel>(reader));
+                    models.Add(entityType.Read<TObject>(reader));
                 if (reader.NextResult() && reader.Read())
                     models.Size = reader.GetInt32(0);
             }
@@ -916,17 +944,19 @@ namespace Gentings.Data.Query
         /// <summary>
         /// 读取模型实例列表。
         /// </summary>
+        /// <typeparam name="TObject">返回的模型类型。</typeparam>
         /// <param name="cancellationToken">取消标记。</param>
         /// <returns>返回模型实例列表。</returns>
-        protected async Task<IPageEnumerable<TModel>> LoadPageAsync(CancellationToken cancellationToken = default)
+        protected async Task<IPageEnumerable<TObject>> LoadPageAsync<TObject>(CancellationToken cancellationToken = default)
         {
-            var models = new PageEnumerable<TModel>();
-            models.PI = PageIndex ?? 1;
-            models.PS = Size ?? 20;
+            var models = new PageEnumerable<TObject>();
+            models.Page = PageIndex ?? 1;
+            models.PageSize = Size ?? 20;
+            var entityType = typeof(TObject).GetEntityType();
             using (var reader = await _db.ExecuteReaderAsync(_sqlGenerator.Query(this).ToString(), cancellationToken: cancellationToken))
             {
                 while (await reader.ReadAsync(cancellationToken))
-                    models.Add(Entity.Read<TModel>(reader));
+                    models.Add(entityType.Read<TObject>(reader));
                 if (await reader.NextResultAsync(cancellationToken) && await reader.ReadAsync(cancellationToken))
                     models.Size = reader.GetInt32(0);
             }

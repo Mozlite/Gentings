@@ -30,12 +30,12 @@ namespace Gentings.Data.Internal
         /// <summary>
         /// 页码。
         /// </summary>
-        public int PI { get; set; }
+        public int Page { get; set; }
 
         /// <summary>
         /// 每页显示记录数。
         /// </summary>
-        public int PS { get; set; }
+        public int PageSize { get; set; }
 
         /// <summary>
         /// 总记录数。
@@ -52,7 +52,7 @@ namespace Gentings.Data.Internal
             {
                 if (_page == -1)
                 {
-                    _page = (int)Math.Ceiling(Size * 1.0 / PS);
+                    _page = (int)Math.Ceiling(Size * 1.0 / PageSize);
                 }
                 return _page;
             }

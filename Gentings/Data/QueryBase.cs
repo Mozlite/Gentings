@@ -9,8 +9,9 @@ namespace Gentings.Data
     /// <summary>
     /// 查询基类。
     /// </summary>
-    /// <typeparam name="TModel">返回的实体模型类型。</typeparam>
-    public abstract class QueryBase<TModel> : IPageEnumerable<TModel>
+    /// <typeparam name="TModel">数据库实体类型。</typeparam>
+    /// <typeparam name="TObject">返回的实体模型类型。</typeparam>
+    public abstract class QueryBase<TModel, TObject> : IPageEnumerable<TObject>
     {
         /// <summary>
         /// 初始化查询上下文。
@@ -22,7 +23,7 @@ namespace Gentings.Data
         /// <summary>
         /// 页码。
         /// </summary>
-        public int PI
+        public int Page
         {
             get
             {
@@ -36,25 +37,7 @@ namespace Gentings.Data
         /// <summary>
         /// 每页显示记录数。
         /// </summary>
-        public int PS { get; set; } = 20;
-
-        /// <summary>
-        /// 页码。
-        /// </summary>
-        public int Page
-        {
-            get => PI;
-            set => PI = value;
-        }
-
-        /// <summary>
-        /// 每页显示记录数。
-        /// </summary>
-        public int PageSize
-        {
-            get => PS;
-            set => PS = value;
-        }
+        public int PageSize { get; set; } = 20;
 
         /// <summary>
         /// 总记录数。
@@ -66,13 +49,13 @@ namespace Gentings.Data
         /// </summary>
         public int Pages => Models?.Pages ?? 0;
 
-        internal IPageEnumerable<TModel> Models { private get; set; }
+        internal IPageEnumerable<TObject> Models { private get; set; }
 
         /// <summary>返回一个循环访问集合的枚举器。</summary>
         /// <returns>用于循环访问集合的枚举数。</returns>
-        public IEnumerator<TModel> GetEnumerator()
+        public IEnumerator<TObject> GetEnumerator()
         {
-            return (Models ?? Enumerable.Empty<TModel>()).GetEnumerator();
+            return (Models ?? Enumerable.Empty<TObject>()).GetEnumerator();
         }
 
         /// <summary>返回循环访问集合的枚举数。</summary>
@@ -81,5 +64,13 @@ namespace Gentings.Data
         {
             return GetEnumerator();
         }
+    }
+
+    /// <summary>
+    /// 查询基类。
+    /// </summary>
+    /// <typeparam name="TModel">返回的实体模型类型。</typeparam>
+    public abstract class QueryBase<TModel> : QueryBase<TModel, TModel>
+    {
     }
 }

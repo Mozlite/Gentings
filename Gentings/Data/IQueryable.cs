@@ -234,7 +234,17 @@ namespace Gentings.Data
         /// <param name="cancellationToken">取消标识。</param>
         /// <returns>返回数据列表。</returns>
         Task<TValue> FirstOrDefaultAsync<TValue>(Func<DbDataReader, TValue> converter, CancellationToken cancellationToken = default);
-        
+
+        /// <summary>
+        /// 查询数据库返回结果。
+        /// </summary>
+        /// <typeparam name="TObject">返回的对象类型。</typeparam>
+        /// <param name="pageIndex">页码。</param>
+        /// <param name="pageSize">每页显示的记录数。</param>
+        /// <param name="count">分页总记录数计算列。</param>
+        /// <returns>返回数据列表。</returns>
+        IPageEnumerable<TObject> AsEnumerable<TObject>(int pageIndex, int pageSize, Expression<Func<TModel, object>> count = null);
+
         /// <summary>
         /// 查询数据库返回结果。
         /// </summary>
@@ -275,6 +285,19 @@ namespace Gentings.Data
         /// <param name="cancellationToken">取消标识。</param>
         /// <returns>返回数据列表。</returns>
         Task<IPageEnumerable<TModel>> AsEnumerableAsync(int pageIndex, int pageSize,
+            Expression<Func<TModel, object>> count = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 查询数据库返回结果。
+        /// </summary>
+        /// <typeparam name="TObject">返回的对象类型。</typeparam>
+        /// <param name="pageIndex">页码。</param>
+        /// <param name="pageSize">每页显示的记录数。</param>
+        /// <param name="count">分页总记录数计算列。</param>
+        /// <param name="cancellationToken">取消标识。</param>
+        /// <returns>返回数据列表。</returns>
+        Task<IPageEnumerable<TObject>> AsEnumerableAsync<TObject>(int pageIndex, int pageSize,
             Expression<Func<TModel, object>> count = null,
             CancellationToken cancellationToken = default);
 

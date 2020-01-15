@@ -265,11 +265,12 @@ namespace Gentings.Data.Internal
         /// <param name="cancellationToken">取消标记。</param>
         /// <returns>返回模型实例对象。</returns>
         Task<IEnumerable<TModel>> FetchAsync(string sql, object parameters = null,
-            CancellationToken cancellationToken = default); 
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 分页获取实例列表。
         /// </summary>
+        /// <typeparam name="TQuery">查询实例类型。</typeparam>
         /// <param name="query">查询实例。</param>
         /// <param name="countExpression">返回总记录数的表达式,用于多表拼接过滤重复记录数。</param>
         /// <returns>返回分页实例列表。</returns>
@@ -278,11 +279,33 @@ namespace Gentings.Data.Internal
         /// <summary>
         /// 分页获取实例列表。
         /// </summary>
+        /// <typeparam name="TObject">返回的对象模型类型。</typeparam>
+        /// <typeparam name="TQuery">查询实例类型。</typeparam>
+        /// <param name="query">查询实例。</param>
+        /// <param name="countExpression">返回总记录数的表达式,用于多表拼接过滤重复记录数。</param>
+        /// <returns>返回分页实例列表。</returns>
+        TQuery Load<TQuery, TObject>(TQuery query, Expression<Func<TModel, object>> countExpression = null) where TQuery : QueryBase<TModel, TObject>;
+
+        /// <summary>
+        /// 分页获取实例列表。
+        /// </summary>
+        /// <typeparam name="TQuery">查询实例类型。</typeparam>
         /// <param name="query">查询实例。</param>
         /// <param name="countExpression">返回总记录数的表达式,用于多表拼接过滤重复记录数。</param>
         /// <param name="cancellationToken">取消标识。</param>
         /// <returns>返回分页实例列表。</returns>
         Task<TQuery> LoadAsync<TQuery>(TQuery query, Expression<Func<TModel, object>> countExpression = null, CancellationToken cancellationToken = default) where TQuery : QueryBase<TModel>;
+
+        /// <summary>
+        /// 分页获取实例列表。
+        /// </summary>
+        /// <typeparam name="TObject">返回的对象模型类型。</typeparam>
+        /// <typeparam name="TQuery">查询实例类型。</typeparam>
+        /// <param name="query">查询实例。</param>
+        /// <param name="countExpression">返回总记录数的表达式,用于多表拼接过滤重复记录数。</param>
+        /// <param name="cancellationToken">取消标识。</param>
+        /// <returns>返回分页实例列表。</returns>
+        Task<TQuery> LoadAsync<TQuery, TObject>(TQuery query, Expression<Func<TModel, object>> countExpression = null, CancellationToken cancellationToken = default) where TQuery : QueryBase<TModel, TObject>;
 
         /// <summary>
         /// 通过条件表达式判断是否存在实例对象。
