@@ -232,6 +232,33 @@ namespace Gentings.Properties {
         }
         
         /// <summary>
+        ///   查找类似 完成 的本地化字符串。
+        /// </summary>
+        internal static string MigrationStatus_Completed {
+            get {
+                return ResourceManager.GetString("MigrationStatus_Completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 错误 的本地化字符串。
+        /// </summary>
+        internal static string MigrationStatus_Error {
+            get {
+                return ResourceManager.GetString("MigrationStatus_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 迁移中 的本地化字符串。
+        /// </summary>
+        internal static string MigrationStatus_Normal {
+            get {
+                return ResourceManager.GetString("MigrationStatus_Normal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 类型“{1}”的属性“{0}”必须包含get访问器。 的本地化字符串。
         /// </summary>
         internal static string NoGetter {
@@ -264,6 +291,15 @@ namespace Gentings.Properties {
         internal static string RandomNumberGenerator_SizeInvalid {
             get {
                 return ResourceManager.GetString("RandomNumberGenerator_SizeInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 [服务]{0}执行错误：{1}。 的本地化字符串。
+        /// </summary>
+        internal static string TaskExecuteError {
+            get {
+                return ResourceManager.GetString("TaskExecuteError", resourceCulture);
             }
         }
         

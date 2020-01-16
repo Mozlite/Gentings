@@ -513,10 +513,5 @@ namespace Gentings.Data
                 }
             }
         }
-
-        /// <summary>
-        /// 数据库错误消息状态。
-        /// </summary>
-        public static string Error { get; internal set; }
     }
 }

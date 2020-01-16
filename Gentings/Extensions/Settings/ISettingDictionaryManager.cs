@@ -6,7 +6,7 @@ namespace Gentings.Extensions.Settings
     /// <summary>
     /// 字典管理接口。
     /// </summary>
-    public interface ISettingDictionaryManager : IGroupManager<SettingDictionary>, ISingletonService
+    public interface ISettingDictionaryManager : IGroupManager<SettingDictionary>
     {
         /// <summary>
         /// 通过路径获取字典值。

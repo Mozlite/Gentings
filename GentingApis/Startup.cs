@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Gentings.Data.Migrations;
 using Gentings.Data.SqlServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -55,7 +56,10 @@ namespace Gentings.Apis
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMemoryCache();
-            services.AddGentings(Configuration).AddSqlServer();
+            services.AddGentings(Configuration)//添加服务自动注册框架
+                .AddSqlServer()//添加SQLServer数据库服务
+                .AddDataMigration()//添加数据库CodeFirst自动迁移后台服务
+                ;
             services.AddAuthentication();
             services.AddAuthorization();
             services.AddSwaggerGen(options =>
