@@ -95,7 +95,7 @@ namespace Gentings.Identity
         /// 建立索引。
         /// </summary>
         /// <param name="builder">数据迁移构建实例。</param>
-        public void Up1(MigrationBuilder builder)
+        public virtual void Up1(MigrationBuilder builder)
         {
             CreateIndex(builder);
         }

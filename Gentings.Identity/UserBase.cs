@@ -151,6 +151,11 @@ namespace Gentings.Identity
         public virtual string RoleName { get; set; }
 
         /// <summary>
+        /// 父级Id。
+        /// </summary>
+        public int ParentId { get; set; }
+
+        /// <summary>
         /// 返回当前用户的用户名。
         /// </summary>
         public override string ToString()

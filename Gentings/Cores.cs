@@ -9,6 +9,7 @@ using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -408,7 +409,7 @@ namespace Gentings
         /// </summary>
         public static Version Version => Assembly.GetEntryAssembly()?.GetName().Version;
 
-        private static readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
+        private static readonly JsonSerializerOptions _defaultJsonSerializerOptions = new JsonSerializerOptions
         {
             IgnoreNullValues = true,
             PropertyNameCaseInsensitive = true
@@ -424,7 +425,7 @@ namespace Gentings
         {
             if (instance == null)
                 return null;
-            options = options ?? _jsonSerializerOptions;
+            options = options ?? _defaultJsonSerializerOptions;
             return JsonSerializer.Serialize(instance, options);
         }
 
@@ -439,7 +440,7 @@ namespace Gentings
         {
             try
             {
-                options = options ?? _jsonSerializerOptions;
+                options = options ?? _defaultJsonSerializerOptions;
                 return JsonSerializer.Deserialize<TModel>(json, options);
             }
             catch
